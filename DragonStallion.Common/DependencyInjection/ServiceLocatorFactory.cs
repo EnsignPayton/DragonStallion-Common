@@ -5,8 +5,10 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 
-namespace DragonStallion.Common.ServiceLocation
+namespace DragonStallion.Common.DependencyInjection
 {
     public class ServiceLocatorFactory
     {
@@ -55,16 +57,30 @@ namespace DragonStallion.Common.ServiceLocation
 
         public IServiceLocator Build()
         {
-            RegisterAssemblies();
-            RegisterImplementations();
-            RegisterSingletons();
+            var logger = NLog.LogManager.GetCurrentClassLogger();
 
-            var container = _builder.Build();
-            var serviceLocator = new AutofacServiceLocator(container);
+            try
+            {
+                RegisterAssemblies();
+                RegisterImplementations();
+                RegisterSingletons();
+                RegisterLogger();
 
-            ServiceLocator.SetLocatorProvider(() => serviceLocator);
+                var container = _builder.Build();
+                var serviceLocator = new AutofacServiceLocator(container);
 
-            return serviceLocator;
+                ServiceLocator.SetLocatorProvider(() => serviceLocator);
+
+                var loggerFactory = serviceLocator.GetInstance<ILoggerFactory>();
+                loggerFactory.AddNLog();
+
+                return serviceLocator;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw;
+            }
         }
 
         private void RegisterAssemblies()
@@ -96,6 +112,17 @@ namespace DragonStallion.Common.ServiceLocation
 
             _builder.RegisterTypes(singletonTypes).AsImplementedInterfaces().SingleInstance();
             _builder.RegisterTypes(singletonTypes).SingleInstance();
+        }
+
+        private void RegisterLogger()
+        {
+            _builder.RegisterType<LoggerFactory>()
+                .As<ILoggerFactory>()
+                .SingleInstance();
+
+            _builder.RegisterGeneric(typeof(Logger<>))
+                .As(typeof(ILogger<>))
+                .SingleInstance();
         }
 
         #endregion
