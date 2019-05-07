@@ -6,6 +6,7 @@
     <PackageProjectUrl />
     <RepositoryUrl>https://github.com/EnsignPayton/DragonStallion-Common</RepositoryUrl>
     <Description>Common library for personal projects</Description>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
