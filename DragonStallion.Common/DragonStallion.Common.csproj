@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>DragonStallion</Authors>
+    <PackageProjectUrl />
+    <RepositoryUrl>https://github.com/EnsignPayton/DragonStallion-Common</RepositoryUrl>
+    <Description>Common library for personal projects</Description>
   </PropertyGroup>
 
   <ItemGroup>
