@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>DragonStallion</Authors>
     <PackageProjectUrl />
     <RepositoryUrl>https://github.com/EnsignPayton/DragonStallion-Common</RepositoryUrl>
     <Description>Common library for personal projects</Description>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
@@ -14,6 +14,8 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extras.CommonServiceLocator" Version="5.0.0" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0-preview8.19405.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
   <ItemGroup>

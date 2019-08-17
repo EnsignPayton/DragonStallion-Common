@@ -5,6 +5,8 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
+using DragonStallion.Common.Config;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
@@ -65,6 +67,7 @@ namespace DragonStallion.Common.DependencyInjection
                 RegisterImplementations();
                 RegisterSingletons();
                 RegisterLogger();
+                RegisterConfiguration();
 
                 var container = _builder.Build();
                 var serviceLocator = new AutofacServiceLocator(container);
@@ -122,6 +125,21 @@ namespace DragonStallion.Common.DependencyInjection
 
             _builder.RegisterGeneric(typeof(Logger<>))
                 .As(typeof(ILogger<>))
+                .SingleInstance();
+        }
+
+        private void RegisterConfiguration()
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json", true)
+                .Build();
+
+            var appSettings = new AppSettings();
+            config.GetSection("AppSettings").Bind(appSettings);
+
+            _builder.RegisterInstance(appSettings)
+                .As<AppSettings>()
                 .SingleInstance();
         }
 
