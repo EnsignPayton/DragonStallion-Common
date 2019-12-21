@@ -1,4 +1,4 @@
-﻿namespace DragonStallion.Common.Config
+﻿namespace DS.Common.Config
 {
     public class AppSettings
     {

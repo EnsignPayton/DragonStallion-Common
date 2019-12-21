@@ -5,12 +5,12 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
-using DragonStallion.Common.Config;
+using DS.Common.Config;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
-namespace DragonStallion.Common.DependencyInjection
+namespace DS.Common.DependencyInjection
 {
     public class ServiceLocatorFactory
     {

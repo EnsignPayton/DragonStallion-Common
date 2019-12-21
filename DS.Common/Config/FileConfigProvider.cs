@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace DragonStallion.Common.Config
+namespace DS.Common.Config
 {
     public class FileConfigProvider<T> : IConfigProvider<T>
     {

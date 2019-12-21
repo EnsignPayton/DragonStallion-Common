@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DragonStallion.Common.Config
+namespace DS.Common.Config
 {
     public interface IConfigProvider<T>
     {
